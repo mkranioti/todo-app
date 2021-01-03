@@ -11,9 +11,10 @@ class TodoList extends Component {
         this.addItem = this.addItem.bind(this);
       }
       addItem(e) {
-        if (this._inputElement.value !== "") {
+        var inputValue = e.target[0].value;
+        if (inputValue !== "") {
           var newItem = {
-            text: this._inputElement.value,
+            text: inputValue,
             key: Date.now()
           };
        
@@ -23,10 +24,8 @@ class TodoList extends Component {
             };
           });
          
-          this._inputElement.value = "";
+          e.target[0].value = "";
         }
-         
-        console.log(this.state.items);
            
         e.preventDefault();
       }
@@ -35,7 +34,7 @@ class TodoList extends Component {
         <div className="todoListMain">
           <div className="header">
             <form onSubmit={this.addItem}>
-              <input ref={(a) => this._inputElement = a} placeholder="enter task">
+              <input placeholder="enter task">
               </input>
               <button type="submit">add</button>
             </form>
